@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import './index.css'
 import Navigation from "./components/navigation";
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 

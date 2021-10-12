@@ -1,0 +1,35 @@
+html,
+body,
+#app {
+    margin: 0;
+    height: 100%;
+    width: 100%;
+}
+
+li {
+    list-style-type: none;
+}
+
+ul {
+    padding: 0;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+.space-between {
+    justify-content: space-between;
+}
+
+.nav li {
+    margin-right: 10px;
+}
+
+.nav-link {
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+    color: inherit;
+}

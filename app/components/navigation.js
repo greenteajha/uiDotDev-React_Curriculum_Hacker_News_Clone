@@ -3,21 +3,23 @@ import { NavLink } from "react-router-dom";
 
 export default function Navigation () {
     return(
-        <nav className="top-nav">
+        <nav className="row space-between">
             <ul className="row nav">
-            <li>
-                <NavLink 
-                    to="/"
-                >Top
-                </NavLink>
-            </li>
-            <li>
-                <NavLink
-                    to="/"
-                >New
-                </NavLink> 
-            </li>
-        </ul>
+                <li>
+                    <NavLink 
+                        to="/"
+                        className="nav-link"
+                    >Top
+                    </NavLink>
+                </li>
+                <li>
+                    <NavLink
+                        to="/"
+                        className="nav-link"
+                    >New
+                    </NavLink> 
+                </li>
+            </ul>
         </nav>
     )
 }
