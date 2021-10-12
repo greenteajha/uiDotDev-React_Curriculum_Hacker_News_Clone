@@ -1,10 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import Navigation from "./components/navigation";
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 class App extends React.Component {
     render() {
         return (
-            <div>HELLO WORLD</div>
+            <Router>
+                <Navigation />
+            </Router>
         )
     }
 }
