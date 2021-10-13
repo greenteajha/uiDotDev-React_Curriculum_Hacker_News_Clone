@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 
 export default function Navigation () {
     return(
-        <nav className="row space-between">
+        <nav className="row space-between top-nav">
             <ul className="row nav">
                 <li>
                     <NavLink 
@@ -20,6 +20,10 @@ export default function Navigation () {
                     </NavLink> 
                 </li>
             </ul>
+            <button
+                className="btn"
+            >{'Light Theme'}
+            </button>
         </nav>
     )
 }

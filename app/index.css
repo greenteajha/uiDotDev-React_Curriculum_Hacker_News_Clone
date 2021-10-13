@@ -12,6 +12,7 @@ li {
 
 ul {
     padding: 0;
+    margin: 10px;
 }
 
 .row {
@@ -24,7 +25,7 @@ ul {
 }
 
 .nav li {
-    margin-right: 10px;
+    margin: 10px;
 }
 
 .nav-link {
@@ -32,4 +33,17 @@ ul {
     font-weight: bold;
     text-decoration: none;
     color: inherit;
+}
+
+.btn {
+    border: none;
+    background: transparent;
+    margin: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 0px;
+}
+
+.top-nav {
+    background-color: wheat;
 }
