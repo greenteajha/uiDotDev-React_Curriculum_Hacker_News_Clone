@@ -4,7 +4,8 @@ import { getTopNews } from "../utils/api";
 export default class ArticleEntry extends React.Component{
     render () {        
 
-        getTopNews()
+        var arr = getTopNews()
+        console.log(arr[1])
         
         return (
             <div></div>
