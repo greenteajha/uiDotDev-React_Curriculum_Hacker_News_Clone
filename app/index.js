@@ -11,7 +11,11 @@ class App extends React.Component {
             <Router>
                 <Navigation />
                 <div className="container">
-                    <TopNews />
+                    <React.Suspense>
+                        <Switch>
+                            <Route exact path="/" component={ TopNews } />
+                        </Switch>
+                    </React.Suspense>
                 </div>
             </Router>
         )
