@@ -5,37 +5,13 @@ Function to obtain the top 10 news from Hacker News API
 */
 export function getTopNews () {
 
-    const topStoriesEndPoint = 'https://hacker-news.firebaseio.com/v0/topstories.json'
-    let articleArray = []
-    let abc = []
+    const topStoriesEndPoint = window.encodeURI('https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty')
 
-    fetch(topStoriesEndPoint)
-    .then(response => response.json())
-    .then(data => {
+    return fetch(topStoriesEndPoint)
+        .then((res) => res.json())
+        .then((data) => {
 
-        //console.log(data)
-        //console.log(typeof(data))
-
-        for(var key in data.slice(0,10)) {
-            var articleID = data[key];
-            //console.log(articleID)
-
-            let response = fetch(`https://hacker-news.firebaseio.com/v0/item/${articleID}.json?`)
-            .then(response => response.json())
-            .then(data => {
-                articleArray.push(data)
-            })
-            
-            
-        }
-
-        //console.log(Promise.all(articleArray))
-
-        //console.log(articleArray)
-        
-
-    })
-
-    return articleArray
+           return data
+        })
     
 }
