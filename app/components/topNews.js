@@ -21,17 +21,20 @@ function DisplayTopNews ({topNews}) {
 
             return(
                 <div className="topNewsEntry" key={url}>
-                    <a href={ url }>{ title }</a>
-                    <div>by { by } on { date.toLocaleString() } with { numberComments } comments</div>
+                    <div>
+                        <a className="title-link" href={ url }>{ title }</a>
+                    </div>
+                    <div className="newsInfo">
+                        by <a href="#" >{ by }</a> on { date.toLocaleString() } with <a href="#" >{ numberComments }</a> comments
+                    </div>
                 </div>
             )
     
     
         })
     )
-
-    
 }
+
 
 export default class TopNews extends React.Component{
     
