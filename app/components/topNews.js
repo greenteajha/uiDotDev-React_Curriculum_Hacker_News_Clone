@@ -6,30 +6,30 @@ import { fetchTopNews, fetchArticleDetails } from "../utils/api";
 function DisplayTopNews ({topNews}) {
 
     return (
-        topNews.map((news) => {
-    
-            const { by, kids, time, title, url } = news
-            var date = new Date(time)
+        <ul>
+            {topNews.map((news) => {
+        
+                const { by, kids, time, title, url } = news
+                var date = new Date(time)
 
-            if(kids === undefined){
-                var numberComments = 0
-            }else{
-                var numberComments = kids.length
-            }
+                if(kids === undefined){
+                    var numberComments = 0
+                }else{
+                    var numberComments = kids.length
+                }
 
-            return(
-                <div className="topNewsEntry" key={url}>
-                    <div>
+                return(
+                    <li className="topNewsEntry" key={ url } >
                         <a className="title-link" href={ url }>{ title }</a>
-                    </div>
-                    <div className="newsInfo">
-                        by <a href="#" >{ by }</a> on { date.toLocaleString() } with <a href="#" >{ numberComments }</a> comments
-                    </div>
-                </div>
-            )
-    
-    
-        })
+                        <div className="newsInfo">
+                            by <a href="#" >{ by }</a> on { date.toLocaleString() } with <a href="#" >{ numberComments }</a> comments
+                        </div>
+                    </li>
+                )
+        
+        
+            })}
+        </ul>
     )
 }
 
@@ -63,9 +63,7 @@ export default class TopNews extends React.Component{
     render () {   
 
         return (
-            <div>
-                { <DisplayTopNews topNews={this.state.topNewsList} /> }
-            </div>
+            <DisplayTopNews topNews={this.state.topNewsList} />
         )
 
     }
