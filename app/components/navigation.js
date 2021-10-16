@@ -14,7 +14,7 @@ export default function Navigation () {
                 </li>
                 <li>
                     <NavLink
-                        to="/"
+                        to="/new"
                         className="nav-link"
                     >New
                     </NavLink> 

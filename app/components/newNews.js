@@ -1,12 +1,12 @@
 import React from "react";
-import { fetchTopNews, fetchArticleDetails } from "../utils/api";
+import { fetchNewNews, fetchArticleDetails } from "../utils/api";
 
 
 /* Display all top news article */
-function DisplayTopNews ({topNews}) {
+function DisplayNewNews ({newNews}) {
 
     return (
-        topNews.map((news) => {
+        newNews.map((news) => {
     
             const { by, kids, time, title, url } = news
             var date = new Date(time)
@@ -18,7 +18,7 @@ function DisplayTopNews ({topNews}) {
             }
 
             return(
-                <div className="topNewsEntry" key={url}>
+                <div className="newNewsEntry" key={url}>
                     <div>
                         <a className="title-link" href={ url }>{ title }</a>
                     </div>
@@ -34,27 +34,27 @@ function DisplayTopNews ({topNews}) {
 }
 
 
-export default class TopNews extends React.Component{
+export default class NewNews extends React.Component{
     
     state = {        
-        topNewsList: []
+        newNewsList: []
     }
 
     componentDidMount(){
-        this.updateTopNews()
+        this.updateNewNews()
     }
 
-    updateTopNews = () => {
+    updateNewNews = () => {
         this.setState({
-            topNewsList: []
+            newNewsList: []
         })
 
-        fetchTopNews()
+        fetchNewNews()
             .then((data) => {
                 fetchArticleDetails(data)
                     .then((res) => {                        
                         this.setState({
-                            topNewsList: res
+                            newNewsList: res
                         })
                     })
             })
@@ -64,7 +64,7 @@ export default class TopNews extends React.Component{
 
         return (
             <div>
-                { <DisplayTopNews topNews={this.state.topNewsList} /> }
+                { <DisplayNewNews newNews={this.state.newNewsList} /> }
             </div>
         )
 

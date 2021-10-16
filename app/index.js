@@ -4,6 +4,7 @@ import './index.css'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Navigation from "./components/navigation";
 import TopNews from "./components/topNews";
+import NewNews from "./components/newNews";
 
 class App extends React.Component {
     render() {
@@ -14,6 +15,7 @@ class App extends React.Component {
                     <React.Suspense>
                         <Switch>
                             <Route exact path="/" component={ TopNews } />
+                            <Route exact path="/new" component={ NewNews } />
                         </Switch>
                     </React.Suspense>
                 </div>
