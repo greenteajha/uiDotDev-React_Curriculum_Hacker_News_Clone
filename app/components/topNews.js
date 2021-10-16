@@ -21,7 +21,7 @@ function DisplayTopNews ({topNews}) {
                 return(
                     <li className="topNewsEntry" key={ url } >
                         <a className="title-link" href={ url }>{ title }</a>
-                        <div className="newsInfo">
+                        <div className="newsInfo" >
                             by <a href="#" >{ by }</a> on { date.toLocaleString() } with <a href="#" >{ numberComments }</a> comments
                         </div>
                     </li>
@@ -63,7 +63,9 @@ export default class TopNews extends React.Component{
     render () {   
 
         return (
-            <DisplayTopNews topNews={this.state.topNewsList} />
+            <div>
+                <DisplayTopNews topNews={this.state.topNewsList} />
+            </div>       
         )
 
     }

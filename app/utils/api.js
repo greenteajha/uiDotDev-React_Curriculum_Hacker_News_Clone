@@ -10,7 +10,7 @@ export function fetchNewNews () {
     return fetch(topStoriesEndPoint)
         .then((res) => res.json())
         .then((data) => {
-            return data.slice(0,10)
+            return data.slice(0,20)
         })
 }
 
@@ -25,7 +25,7 @@ export function fetchTopNews () {
     return fetch(topStoriesEndPoint)
         .then((res) => res.json())
         .then((data) => {
-            return data.slice(0,10)
+            return data.slice(0,20)
         })
 }
 

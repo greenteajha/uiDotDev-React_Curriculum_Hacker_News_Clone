@@ -62,8 +62,10 @@ export default class NewNews extends React.Component{
     
     render () {   
 
-        return (           
-            <DisplayNewNews newNews={this.state.newNewsList} />
+        return ( 
+            <div>
+                <DisplayNewNews newNews={this.state.newNewsList} />
+            </div>          
         )
 
     }
