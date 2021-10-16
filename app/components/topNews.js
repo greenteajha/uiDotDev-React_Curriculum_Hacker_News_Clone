@@ -19,7 +19,7 @@ function DisplayTopNews ({topNews}) {
                 }
 
                 return(
-                    <li className="topNewsEntry" key={ url } >
+                    <li className="topNewsEntry" key={ title } >
                         <a className="title-link" href={ url }>{ title }</a>
                         <div className="newsInfo" >
                             by <a href="#" >{ by }</a> on { date.toLocaleString() } with <a href="#" >{ numberComments }</a> comments
