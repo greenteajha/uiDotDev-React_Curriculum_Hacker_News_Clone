@@ -1,5 +1,6 @@
 import React from "react";
 import { fetchNewNews, fetchArticleDetails } from "../utils/api";
+import Loading from "./loading";
 
 
 /* Display all top news article */
@@ -37,7 +38,8 @@ function DisplayNewNews ({newNews}) {
 export default class NewNews extends React.Component{
     
     state = {        
-        newNewsList: []
+        newNewsList: [],
+        fetchedList: 0
     }
 
     componentDidMount(){
@@ -46,7 +48,8 @@ export default class NewNews extends React.Component{
 
     updateNewNews = () => {
         this.setState({
-            newNewsList: []
+            newNewsList: [],
+            fetchedList: 0
         })
 
         fetchNewNews()
@@ -54,16 +57,29 @@ export default class NewNews extends React.Component{
                 fetchArticleDetails(data)
                     .then((res) => {                        
                         this.setState({
-                            newNewsList: res
+                            newNewsList: res,
+                            fetchedList: 1
                         })
                     })
             })
+    }
+
+    isLoading = () => {
+        const fetched = this.state.fetchedList
+
+        if(fetched === 0){
+            return true
+        }else{
+            return false
+        }
+        
     }
     
     render () {   
 
         return ( 
             <div>
+                { this.isLoading() && <Loading /> }
                 <DisplayNewNews newNews={this.state.newNewsList} />
             </div>          
         )

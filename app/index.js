@@ -3,8 +3,10 @@ import ReactDOM from "react-dom";
 import './index.css'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Navigation from "./components/navigation";
-import TopNews from "./components/topNews";
-import NewNews from "./components/newNews";
+import Loading from "./components/loading";
+
+const TopNews = React.lazy(() => import('./components/topNews'))
+const NewNews = React.lazy(() => import('./components/newNews'))
 
 class App extends React.Component {
     render() {
@@ -12,7 +14,7 @@ class App extends React.Component {
             <Router>
                 <Navigation />
                 <div className="container">
-                    <React.Suspense>
+                    <React.Suspense fallback={<Loading />}>
                         <Switch>
                             <Route exact path="/" component={ TopNews } />
                             <Route exact path="/new" component={ NewNews } />

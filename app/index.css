@@ -78,3 +78,8 @@ ul {
 .top-nav {
     background-color: wheat;
 }
+
+.loadingText {
+    font-weight: bold;
+    color: rgb(187, 46, 31);
+}
