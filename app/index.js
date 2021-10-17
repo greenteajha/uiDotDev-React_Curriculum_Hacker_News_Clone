@@ -8,6 +8,7 @@ import { ThemeProvider } from "./contexts/theme";
 
 const TopNews = React.lazy(() => import('./components/topNews'))
 const NewNews = React.lazy(() => import('./components/newNews'))
+const UserNews = React.lazy(() => import('./components/userNews'))
 
 class App extends React.Component {
     state = {
@@ -28,7 +29,8 @@ class App extends React.Component {
                         <React.Suspense fallback={<Loading />}>
                             <Switch>
                                 <Route exact path="/" component={ TopNews } />
-                                <Route exact path="/new" component={ NewNews } />
+                                <Route path="/new" component={ NewNews } />
+                                <Route path="/user" component={ UserNews } />
                             </Switch>
                         </React.Suspense>
                     </div>

@@ -1,6 +1,7 @@
 import React from "react";
 import { fetchNewNews, fetchArticleDetails } from "../utils/api";
 import Loading from "./loading";
+import { newsEntry } from "./newsEntry";
 
 
 /* Display all top news article */
@@ -9,24 +10,7 @@ function DisplayNewNews ({newNews}) {
     return (
         <ul>
             {newNews.map((news) => {
-        
-                const { by, kids, time, title, url } = news
-                var date = new Date(time)
-
-                if(kids === undefined){
-                    var numberComments = 0
-                }else{
-                    var numberComments = kids.length
-                }
-
-                return(
-                    <li className="newNewsEntry" key={ title } >
-                        <a className="title-link" href={ url }>{ title }</a>
-                        <div className="newsInfo">
-                            by <a href="#" >{ by }</a> on { date.toLocaleString() } with <a href="#" >{ numberComments }</a> comments
-                        </div>
-                    </li>
-                )
+                return newsEntry(news)
             })}
         </ul>
     )

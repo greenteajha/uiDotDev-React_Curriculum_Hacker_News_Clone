@@ -47,22 +47,12 @@ ul {
     margin-top: 5px;
 }
 
-.newsInfo a {
-    color: black;
-}
-
-.topNewsEntry {
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
-
-.newNewsEntry {
+.NewsEntry {
     padding-top: 10px;
     padding-bottom: 10px;
 }
 
 .nav-link {
-    font-size: 18px;
     font-weight: bold;
     text-decoration: none;
     color: inherit;

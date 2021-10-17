@@ -1,32 +1,16 @@
 import React from "react";
 import { fetchTopNews, fetchArticleDetails } from "../utils/api";
 import Loading from "./loading";
-import { ThemeConsumer } from "../contexts/theme";
+import { newsEntry } from "./newsEntry";
 
 
 /* Display all top news article */
 function DisplayTopNews ({topNews}) {
-    
+
     return (
         <ul>
             {topNews.map((news) => {
-                const { by, kids, time, title, url } = news
-                var date = new Date(time)
-
-                if(kids === undefined){
-                    var numberComments = 0
-                }else{
-                    var numberComments = kids.length
-                }
-
-                return(
-                    <li className="topNewsEntry" key={ title } >
-                        <a className="title-link" href={ url }>{ title }</a>
-                        <div className="newsInfo" >
-                            by <a href="#" >{ by }</a> on { date.toLocaleString() } with <a href="#" >{ numberComments }</a> comments
-                        </div>
-                    </li>
-                )
+                return newsEntry(news)
             })}
         </ul>
     )
