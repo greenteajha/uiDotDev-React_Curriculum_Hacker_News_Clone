@@ -9,9 +9,14 @@ const TopNews = React.lazy(() => import('./components/topNews'))
 const NewNews = React.lazy(() => import('./components/newNews'))
 
 class App extends React.Component {
+    state = {
+        theme: 'light'
+    }
+
     render() {
         return (
             <Router>
+                
                 <Navigation />
                 <div className="container">
                     <React.Suspense fallback={<Loading />}>
