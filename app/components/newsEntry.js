@@ -23,7 +23,7 @@ export function newsEntry (newsInfo) {
                         to={`/user?userid=${ by }`}
                         className="nav-link"
                     >{ by }
-                    </NavLink> on { date.toLocaleString() } with <a href="#" >{ numberComments }</a> comments
+                    </NavLink> on { date.toLocaleString() } with <a href="#" className="comments-link">{ numberComments }</a> comments
                 </div>
             </li>
         )

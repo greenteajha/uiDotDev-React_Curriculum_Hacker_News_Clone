@@ -11,14 +11,14 @@ export default function Navigation () {
                         <li>
                             <NavLink 
                                 to="/"
-                                className="nav-link"
+                                className="bar-nav-link"
                             >Top
                             </NavLink>
                         </li>
                         <li>
                             <NavLink
                                 to="/new"
-                                className="nav-link"
+                                className="bar-nav-link"
                             >New
                             </NavLink> 
                         </li>

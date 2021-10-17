@@ -53,10 +53,19 @@ ul {
 }
 
 .nav-link {
+    color: black;
+    text-align: center;
+}
+
+.bar-nav-link {
     font-weight: bold;
     text-decoration: none;
-    color: inherit;
+    color: black;
     text-align: center;
+}
+
+.comments-link {
+    color: black
 }
 
 .btn {
