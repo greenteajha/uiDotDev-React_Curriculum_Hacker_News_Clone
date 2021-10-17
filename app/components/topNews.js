@@ -1,15 +1,15 @@
 import React from "react";
 import { fetchTopNews, fetchArticleDetails } from "../utils/api";
 import Loading from "./loading";
+import { ThemeConsumer } from "../contexts/theme";
 
 
 /* Display all top news article */
 function DisplayTopNews ({topNews}) {
-
+    
     return (
         <ul>
             {topNews.map((news) => {
-        
                 const { by, kids, time, title, url } = news
                 var date = new Date(time)
 
@@ -27,8 +27,6 @@ function DisplayTopNews ({topNews}) {
                         </div>
                     </li>
                 )
-        
-        
             })}
         </ul>
     )

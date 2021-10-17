@@ -27,8 +27,6 @@ function DisplayNewNews ({newNews}) {
                         </div>
                     </li>
                 )
-        
-        
             })}
         </ul>
     )

@@ -31,7 +31,9 @@ ul {
 }
 
 .nav li {
-    margin: 10px;
+    margin: auto;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .title-link {
@@ -64,13 +66,14 @@ ul {
     font-weight: bold;
     text-decoration: none;
     color: inherit;
+    text-align: center;
 }
 
 .btn {
     border: none;
     background: transparent;
     margin: 20px;
-    font-size: 18px;
+    font-size: 25px;
     font-weight: bold;
     padding: 0px;
 }
