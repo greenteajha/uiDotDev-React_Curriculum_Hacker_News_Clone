@@ -1,20 +1,34 @@
 import React from "react";
-import { fetchUserNews, fetchArticleDetails } from "../utils/api";
+import { fetchUserNews, fetchUserInfo, fetchArticleDetails } from "../utils/api";
 import Loading from "./loading";
 import queryString from "query-string";
 import { newsEntry } from "./newsEntry";
 
 
-function DisplayUserNews ({userNews}) {
+function DisplayUserInfo ({userInfo}) {
+    
+    console.log(userInfo)
+
+    var date = new Date(userInfo.created)
+    
     return (
         <React.Fragment>
-            <h1>TEST</h1>
-            <ul>
-                {userNews.map((news) => {
-                    return newsEntry(news)
-                })}
-            </ul>
+            <h1>{ userInfo.id }</h1>
+            <div>
+                joined { date.toLocaleString() } has { userInfo.karma } karma
+            </div>
         </React.Fragment>
+    )
+}
+
+
+function DisplayUserNews ({userNews}) {
+    return (
+        <ul>
+            {userNews.map((news) => {
+                return newsEntry(news)
+            })}
+        </ul>
     )
 }
 
@@ -22,7 +36,7 @@ function DisplayUserNews ({userNews}) {
 export default class UserNews extends React.Component{
     
     state = {
-        user: '',        
+        user: {},        
         userNewsList: [],
         fetchedList: 0
     }
@@ -49,6 +63,15 @@ export default class UserNews extends React.Component{
                         })
                     })
             })
+        
+        fetchUserInfo(searchValue.userid)
+        .then((data) => {
+            this.setState (({ user }) => ({
+                user: data
+            }))
+        })
+
+        
     }
 
     isLoading = () => {
@@ -66,6 +89,7 @@ export default class UserNews extends React.Component{
         return (
             <div>
                 { this.isLoading() && <Loading /> }
+                <DisplayUserInfo userInfo={this.state.user} />
                 <DisplayUserNews userNews={this.state.userNewsList} />
             </div>       
         )

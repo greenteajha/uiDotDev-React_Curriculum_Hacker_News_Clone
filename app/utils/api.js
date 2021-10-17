@@ -1,4 +1,17 @@
-/* Function to obtain the new user info from Hacker News API */
+/* Function to obtain the user information from Hacker News API */
+export function fetchUserInfo (userName) {
+
+    const userStoriesEndPoint = `https://hacker-news.firebaseio.com/v0/user/${userName}.json?print=pretty`
+
+    return fetch(userStoriesEndPoint)
+        .then((res) => res.json())
+        .then((data) => {
+            return data
+        })
+}
+
+
+/* Function to obtain the new user stories from Hacker News API */
 export function fetchUserNews (userName) {
 
     const userStoriesEndPoint = `https://hacker-news.firebaseio.com/v0/user/${userName}.json?print=pretty`
