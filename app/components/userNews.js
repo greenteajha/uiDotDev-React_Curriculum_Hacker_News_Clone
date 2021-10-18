@@ -6,11 +6,9 @@ import { newsEntry } from "./newsEntry";
 
 
 function DisplayUserInfo ({userInfo}) {
-    
-    console.log(userInfo)
 
     var date = new Date(userInfo.created)
-    
+
     return (
         <React.Fragment>
             <h1>{ userInfo.id }</h1>
@@ -38,7 +36,8 @@ export default class UserNews extends React.Component{
     state = {
         user: {},        
         userNewsList: [],
-        fetchedList: 0
+        fetchedList: 0,
+        fetchedUser: 0
     }
 
     componentDidMount(){
@@ -47,8 +46,10 @@ export default class UserNews extends React.Component{
 
     updateUserNews = () => {
         this.setState({
+            user: {},
             userNewsList: [],
-            fetchedList: 0
+            fetchedList: 0,
+            fetchedUser: 0
         })
 
         const searchValue = queryString.parse(this.props.location.search)
@@ -56,7 +57,7 @@ export default class UserNews extends React.Component{
         fetchUserNews(searchValue.userid)
             .then((data) => {
                 fetchArticleDetails(data)
-                    .then((res) => {     
+                    .then((res) => {
                         this.setState({
                             userNewsList: res,
                             fetchedList: 1
@@ -67,7 +68,8 @@ export default class UserNews extends React.Component{
         fetchUserInfo(searchValue.userid)
         .then((data) => {
             this.setState (({ user }) => ({
-                user: data
+                user: data,
+                fetchedUser: 1
             }))
         })
 
@@ -75,9 +77,10 @@ export default class UserNews extends React.Component{
     }
 
     isLoading = () => {
-        const fetched = this.state.fetchedList
+        const fetchedUserNews = this.state.userNewsList
+        const fetchedUserInfo = this.state.user
 
-        if(fetched === 0){
+        if((this.state.fetchedUser === 0) || (this.state.fetchedList === 0)){
             return true
         }else{
             return false
@@ -86,11 +89,14 @@ export default class UserNews extends React.Component{
     }
     
     render () {
+
+        //console.log(this.isLoading())
+
         return (
             <div>
-                { this.isLoading() && <Loading /> }
-                <DisplayUserInfo userInfo={this.state.user} />
+                { this.state.fetchedUser === 1 && <DisplayUserInfo userInfo={this.state.user} /> }
                 <DisplayUserNews userNews={this.state.userNewsList} />
+                { this.isLoading() && <Loading /> }
             </div>       
         )
 
