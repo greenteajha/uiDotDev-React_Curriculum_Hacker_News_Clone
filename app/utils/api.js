@@ -1,3 +1,14 @@
+/* Function to obtain the all comments from Hacker News API */
+export function fetchComments (commentIDs) {
+
+    return Promise.all(
+        commentIDs.map(commentID => 
+            fetch(`https://hacker-news.firebaseio.com/v0/item/${commentID}.json?print=pretty`)
+                .then(res => res.json())
+        )
+    )
+}
+
 /* Function to obtain the user information from Hacker News API */
 export function fetchUserInfo (userName) {
 
@@ -50,7 +61,7 @@ export function fetchTopNews () {
 }
 
 
-/* Function to fetch all articles based on article IDs */
+/* Function to fetch multiple articles based on article IDs */
 export function fetchArticleDetails (articleIDs) {
 
     return Promise.all(
@@ -59,5 +70,19 @@ export function fetchArticleDetails (articleIDs) {
                 .then(res => res.json())
         )
     )
+
+}
+
+
+/* Function to fetch single article based on article ID */
+export function fetchSingleArticleDetails (articleID) {
+
+    const articleEndpoint = window.encodeURI(`https://hacker-news.firebaseio.com/v0/item/${articleID}.json?print=pretty`) 
+
+    return fetch(articleEndpoint)
+        .then((res) => res.json())
+        .then((data) => {
+            return data
+        })
 
 }

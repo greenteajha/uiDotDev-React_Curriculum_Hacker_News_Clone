@@ -9,6 +9,7 @@ import { ThemeProvider } from "./contexts/theme";
 const TopNews = React.lazy(() => import('./components/topNews'))
 const NewNews = React.lazy(() => import('./components/newNews'))
 const UserNews = React.lazy(() => import('./components/userNews'))
+const commentsSect = React.lazy(() => import('./components/comments'))
 
 class App extends React.Component {
     state = {
@@ -31,6 +32,7 @@ class App extends React.Component {
                                 <Route exact path="/" component={ TopNews } />
                                 <Route path="/new" component={ NewNews } />
                                 <Route path="/user" component={ UserNews } />
+                                <Route path="/post" component={ commentsSect } />
                             </Switch>
                         </React.Suspense>
                     </div>
