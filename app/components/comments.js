@@ -16,13 +16,10 @@ function DisplayUserInfo ({userInfo}) {
 
 function DisplayComments ({postComments}) {
     
-    console.log(postComments)
-    
     return (
 
         <ul>
             {postComments.map((comments) => {
-                console.log(comments)
                 return fetchComments(comments)
             })}
         </ul>
@@ -55,7 +52,6 @@ export default class CommentsSection extends React.Component {
 
         fetchSingleArticleDetails(searchValue.id)
             .then((data) => {
-                console.log(data.kids)
                 this.setState(() => ({
                     user: data,
                     fetchedUser: true,
@@ -75,8 +71,6 @@ export default class CommentsSection extends React.Component {
     }
 
     render () {
-
-        console.log(this.state.commentIDs)
 
         return (
             <div>
