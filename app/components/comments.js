@@ -6,14 +6,29 @@ import { newsEntry } from "./newsEntry";
 
 function DisplayUserInfo ({userInfo}) {
 
-    console.log(userInfo)
-
     return (
         <div>
             { newsEntry(userInfo) }
         </div>
     )
 }
+
+
+function DisplayComments ({postComments}) {
+    
+    console.log(postComments)
+    
+    return (
+
+        <ul>
+            {postComments.map((comments) => {
+                console.log(comments)
+                return fetchComments(comments)
+            })}
+        </ul>
+    )
+}
+
 
 export default class CommentsSection extends React.Component {
     
@@ -40,9 +55,11 @@ export default class CommentsSection extends React.Component {
 
         fetchSingleArticleDetails(searchValue.id)
             .then((data) => {
+                console.log(data.kids)
                 this.setState(() => ({
                     user: data,
-                    fetchedUser: true
+                    fetchedUser: true,
+                    commentIDs: data.kids
                 }))
             })     
     }
@@ -58,6 +75,9 @@ export default class CommentsSection extends React.Component {
     }
 
     render () {
+
+        console.log(this.state.commentIDs)
+
         return (
             <div>
                 { this.state.fetchedUser === true && <DisplayUserInfo userInfo={this.state.user} /> }
