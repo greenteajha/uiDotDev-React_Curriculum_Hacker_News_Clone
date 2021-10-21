@@ -3,6 +3,7 @@ import { fetchComments, fetchSingleArticleDetails } from "../utils/api";
 import Loading from "./loading";
 import queryString from "query-string"
 import { newsEntry } from "./newsEntry";
+import { commentsEntry } from "./commentsEntry";
 
 function DisplayUserInfo ({userInfo}) {
 
@@ -13,25 +14,24 @@ function DisplayUserInfo ({userInfo}) {
     )
 }
 
+function DisplayComments ({cL}) {
 
-function DisplayComments ({postComments}) {
-    
     return (
-
-        <ul>
-            {postComments.map((comments) => {
-                return fetchComments(comments)
+        <div>
+            {cL.map((comment) => {
+                return commentsEntry(comment)
             })}
-        </ul>
+        </div>
     )
-}
 
+}
 
 export default class CommentsSection extends React.Component {
     
     state = {
         user: {},        
-        userNewsList: [],
+        commentIDs: [],
+        commentList: {},
         fetchedList: false,
         fetchedUser: false
     }
@@ -44,20 +44,37 @@ export default class CommentsSection extends React.Component {
         this.setState({
             user: {},
             commentIDs: [],
-            fetchedUser: false,
-            fetchedList: false
+            commentList: {},
+            fetchedList: false,
+            fetchedUser: false
         })
 
         const searchValue = queryString.parse(this.props.location.search)
 
         fetchSingleArticleDetails(searchValue.id)
             .then((data) => {
+
                 this.setState(() => ({
                     user: data,
-                    fetchedUser: true,
-                    commentIDs: data.kids
+                    commentIDs: data.kids,
+                    fetchedUser: true
                 }))
-            })     
+
+                return this.state.commentIDs
+
+            })
+            .then((finalData) => {
+                return fetchComments(finalData)
+            })
+            .then((finalArray) => {
+                this.setState(() => ({
+                    commentList: finalArray,
+                    fetchedList: true
+                }))
+            })
+
+        
+
     }
 
     isLoading = () => {
@@ -75,6 +92,7 @@ export default class CommentsSection extends React.Component {
         return (
             <div>
                 { this.state.fetchedUser === true && <DisplayUserInfo userInfo={this.state.user} /> }
+                { this.state.fetchedList === true && <DisplayComments cL={this.state.commentList} /> }
                 { this.isLoading() && <Loading /> }
             </div>
         )

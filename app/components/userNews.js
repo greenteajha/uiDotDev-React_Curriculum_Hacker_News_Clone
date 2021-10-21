@@ -67,7 +67,7 @@ export default class UserNews extends React.Component{
         
         fetchUserInfo(searchValue.userid)
         .then((data) => {
-            this.setState (({ user }) => ({
+            this.setState ((data) => ({
                 user: data,
                 fetchedUser: true
             }))
