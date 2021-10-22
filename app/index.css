@@ -8,8 +8,13 @@ body,
         Oxygen-Sans, Ubuntu, Cantarell, Helvetica Neue, sans-serif;
 }
 
-.container {
-    margin: 50px;
+.container-light {
+    margin: 0px;
+}
+
+.container-dark {
+    margin: 0px;
+    background-color: #1c2022;
 }
 
 li {
@@ -58,8 +63,13 @@ ul {
     margin: 10px 0;
 }
 
-.nav-link {
+.nav-link-light {
     color: #1c2022;
+    text-align: center;
+}
+
+.nav-link-dark {
+    color: lightgrey;
     text-align: center;
 }
 
@@ -77,8 +87,12 @@ ul {
     text-align: center;
 }
 
-.comments-link {
+.comments-link-light {
     color: #1c2022;
+}
+
+.comments-link-dark {
+    color: lightgrey;
 }
 
 .btn {
@@ -95,7 +109,7 @@ ul {
 }
 
 .top-nav-dark {
-    background-color: #1c2022;
+    background-color: black;
 }
 
 .loadingText {

@@ -25,17 +25,17 @@ class App extends React.Component {
         return (
             <Router>
                 <ThemeProvider value={this.state}>
-                    <Navigation />
-                    <div className="container">
-                        <React.Suspense fallback={<Loading />}>
-                            <Switch>
-                                <Route exact path="/" component={ TopNews } />
-                                <Route path="/new" component={ NewNews } />
-                                <Route path="/user" component={ UserNews } />
-                                <Route path="/post" component={ commentsSect } />
-                                <Route render = {() => <h1>404 Page!</h1>} />
-                            </Switch>
-                        </React.Suspense>
+                    <div className={`container-${this.state.theme}`}>
+                        <Navigation />
+                            <React.Suspense fallback={<Loading />}>
+                                <Switch>
+                                    <Route exact path="/" component={ TopNews } />
+                                    <Route path="/new" component={ NewNews } />
+                                    <Route path="/user" component={ UserNews } />
+                                    <Route path="/post" component={ commentsSect } />
+                                    <Route render = {() => <h1>404 Page!</h1>} />
+                                </Switch>
+                            </React.Suspense>
                     </div>
                 </ThemeProvider>
             </Router>
