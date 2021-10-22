@@ -4,6 +4,8 @@ import { ThemeConsumer } from "../contexts/theme";
 
 export function newsEntry (newsInfo) {
 
+    console.log(newsInfo)
+
     const { by, descendants, id, kids, time, title, url } = newsInfo
 
     var date = new Date(time)
