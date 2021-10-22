@@ -6,19 +6,19 @@ export default function Navigation () {
     return(
         <ThemeConsumer>
             {({ theme, toggleTheme }) => (
-                <nav className="row space-between top-nav">
+                <nav className={`row space-between top-nav-${ theme }`} >
                     <ul className="row nav">
                         <li>
                             <NavLink 
                                 to="/"
-                                className="bar-nav-link"
+                                className={`bar-nav-link-${theme}`}
                             >Top
                             </NavLink>
                         </li>
                         <li>
                             <NavLink
                                 to="/new"
-                                className="bar-nav-link"
+                                className={`bar-nav-link-${theme}`}
                             >New
                             </NavLink> 
                         </li>
