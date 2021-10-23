@@ -2,6 +2,7 @@ import React from "react";
 import { fetchTopNews, fetchArticleDetails } from "../utils/api";
 import Loading from "./loading";
 import { newsEntry } from "./newsEntry";
+import { ThemeConsumer } from "../contexts/theme";
 
 
 /* Display all top news article */
@@ -16,12 +17,12 @@ function DisplayTopNews ({topNews}) {
     )
 }
 
-
+// React component for top news
 export default class TopNews extends React.Component{
     
     state = {        
         topNewsList: [],
-        fetchedList: 0
+        error: null
     }
 
     componentDidMount(){
@@ -30,8 +31,7 @@ export default class TopNews extends React.Component{
 
     updateTopNews = () => {
         this.setState({
-            topNewsList: [],
-            fetchedList: 0
+            topNewsList: []
         })
 
         fetchTopNews()
@@ -40,16 +40,19 @@ export default class TopNews extends React.Component{
                     .then((res) => {                        
                         this.setState({
                             topNewsList: res,
-                            fetchedList: 1
                         })
                     })
+            })
+            .catch(() => {
+                this.setState({
+                    error: "There was an error fetching the Top News"
+                })
             })
     }
 
     isLoading = () => {
-        const fetched = this.state.fetchedList
 
-        if(fetched === 0){
+        if(this.state.topNewsList.length === 0 || !this.state.topNewsList){
             return true
         }else{
             return false
@@ -60,10 +63,16 @@ export default class TopNews extends React.Component{
     render () {   
 
         return (
-            <div>
-                { this.isLoading() && <Loading /> }
-                <DisplayTopNews topNews={this.state.topNewsList} />
-            </div>       
+
+            <ThemeConsumer>
+                {(theme) => (
+                    <div>
+                        { this.state.error && <p className={`error-${theme}`}>{ this.state.error }</p>}
+                        { this.isLoading() && <Loading /> }
+                        { this.state.topNewsList.length !== 0 && this.state.topNewsList && <DisplayTopNews topNews={this.state.topNewsList} /> }
+                    </div>
+                )}
+            </ThemeConsumer>       
         )
 
     }
