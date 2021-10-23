@@ -2,9 +2,11 @@ import React from "react";
 import { NavLink, Link } from "react-router-dom";
 import { ThemeConsumer } from "../contexts/theme";
 
+// Functional component to display one news entry
 export function newsEntry (newsInfo) {
     const { by, descendants, id, time, title, url, type } = newsInfo
 
+    // Check if news entry is a "story" type
     if(type === "story"){
 
         var date = new Date(time)
