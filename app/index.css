@@ -155,3 +155,11 @@ ul {
 .userInfo-dark{
     color: lightgrey;
 }
+
+.error-light{
+
+}
+
+.error-dark{
+    color: lightgrey
+}

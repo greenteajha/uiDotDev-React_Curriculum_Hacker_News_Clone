@@ -8,20 +8,21 @@ import { ThemeConsumer } from "../contexts/theme";
 
 function DisplayUserInfo ({userInfo}) {
 
-    var date = new Date(userInfo.created)
+        var date = new Date(userInfo.created)
 
-    return (
-        <ThemeConsumer>
-            {({theme}) => (
-                <React.Fragment>
-                    <h1 className={`userHeader-${theme}`}>{ userInfo.id }</h1>
-                    <div className={`userInfo-${theme}`}>
-                        joined { date.toLocaleString() } has { userInfo.karma } karma
-                    </div>
-                </React.Fragment>
-            )}
-        </ThemeConsumer>
-    )
+        return (
+            <ThemeConsumer>
+                {({theme}) => (
+                    <React.Fragment>
+                        <h1 className={`userHeader-${theme}`}>{ userInfo.id }</h1>
+                        <div className={`userInfo-${theme}`}>
+                            joined { date.toLocaleString() } has { userInfo.karma } karma
+                        </div>
+                    </React.Fragment>
+                )}
+            </ThemeConsumer>
+        )
+
 }
 
 
@@ -66,7 +67,6 @@ export default class UserNews extends React.Component{
 
             fetchUserNews(searchValue.userid)
                 .then((data) => {
-                    console.log(data)
                     fetchArticleDetails(data)
                         .then((res) => {
                             this.setState({
@@ -75,16 +75,31 @@ export default class UserNews extends React.Component{
                             })
                         })
                 })
+                .catch(() => {
+
+                    this.setState({
+                        error: 'There was an error fetching the User Stories.'
+                    })
+
+                })
             
             fetchUserInfo(searchValue.userid)
             .then((data) => {
-                this.setState ({
-                    user: data,
-                    fetchedUser: true
+
+                    this.setState ({
+                        user: data,
+                        fetchedUser: true
+                    })
+
+            })
+            .catch(() => {
+
+                this.setState({
+                    error: 'There was an error fetching the User Info'
                 })
             })
         
-        }else{
+        }else{ // Check if user id is empty
 
             this.setState({
                 error: "User name is empty!"
@@ -94,6 +109,9 @@ export default class UserNews extends React.Component{
         
     }
 
+    // Checks if the user info and user stories are empty...
+    // ...Or checks if there are any error...
+    // ...If not, isLoading() function is true
     isLoading = () => {
 
         const fetchedUserNews = this.state.userNewsList
@@ -109,14 +127,19 @@ export default class UserNews extends React.Component{
         
     }
     
+    // Render user info and user stories
     render () {
         return (
-            <div>
-                { this.state.error && <p className='error'>{ this.state.error }</p>}
-                { this.isLoading() && <Loading /> }
-                { this.state.fetchedUser === true && <DisplayUserInfo userInfo={this.state.user} /> }
-                { this.state.fetchedList === true && <DisplayUserNews userNews={this.state.userNewsList} /> }
-            </div>       
+            <ThemeConsumer>
+                {({theme}) => (
+                    <div>
+                        { this.state.error && <p className={`error-${theme}`}>{ this.state.error }</p>}
+                        { this.isLoading() && <Loading /> }
+                        { this.state.fetchedUser === true && <DisplayUserInfo userInfo={this.state.user} /> }
+                        { this.state.fetchedList === true && <DisplayUserNews userNews={this.state.userNewsList} /> }
+                    </div>
+                )}
+            </ThemeConsumer>     
         )
 
     }
