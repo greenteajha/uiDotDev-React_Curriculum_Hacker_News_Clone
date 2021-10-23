@@ -2,8 +2,11 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { ThemeConsumer } from "../contexts/theme";
 
+// Functional component for the top navigation bar
 export default function Navigation () {
     return(
+
+        // Include context values for dark, light theme and toggle theme function
         <ThemeConsumer>
             {({ theme, toggleTheme }) => (
                 <nav className={`row space-between top-nav-${ theme }`} >
