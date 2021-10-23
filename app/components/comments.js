@@ -4,17 +4,24 @@ import Loading from "./loading";
 import queryString from "query-string"
 import { newsEntry } from "./newsEntry";
 import { commentsEntry } from "./commentsEntry";
+import { ThemeConsumer } from "../contexts/theme";
 
-function DisplayUserInfo ({userInfo}) {
+// Display post info
+function DisplayPostInfo ({postInfo}) {
+
+    //console.log(postInfo)
 
     return (
         <div>
-            { newsEntry(userInfo) }
+            { newsEntry(postInfo) }
         </div>
     )
 }
 
+// Display list of comments
 function DisplayComments ({cL}) {
+
+    //console.log(cL)
 
     return (
         <div>
@@ -26,14 +33,14 @@ function DisplayComments ({cL}) {
 
 }
 
+// React component for comments section
 export default class CommentsSection extends React.Component {
     
     state = {
         user: {},        
         commentIDs: [],
-        commentList: {},
-        fetchedList: false,
-        fetchedUser: false
+        commentList: [],
+        error: null
     }
 
     componentDidMount(){
@@ -44,42 +51,62 @@ export default class CommentsSection extends React.Component {
         this.setState({
             user: {},
             commentIDs: [],
-            commentList: {},
-            fetchedList: false,
-            fetchedUser: false
+            commentList: [],
+            error: null
         })
 
         const searchValue = queryString.parse(this.props.location.search)
 
-        fetchSingleArticleDetails(searchValue.id)
-            .then((data) => {
+        if(searchValue.id){
 
-                this.setState(() => ({
-                    user: data,
-                    commentIDs: data.kids,
-                    fetchedUser: true
-                }))
+            fetchSingleArticleDetails(searchValue.id)
+                .then((data) => {
 
-                return this.state.commentIDs
+                    if(data){
 
+                        this.setState(() => ({
+                            user: data,
+                            commentIDs: data.kids,
+                        }))
+
+                        return data.kids
+                    }else{
+                        this.setState({
+                            error: "There was an error fetching the comments"
+                        })
+                    }
+                })
+                .then((finalData) => {
+                    return fetchComments(finalData)
+                })
+                .then((finalArray) => {
+                    this.setState(() => ({
+                        commentList: finalArray
+                    }))
+                })
+                .catch(() => {
+                    this.setState({
+                        error: "There was an error fetching the comments"
+                    })
+                })
+
+        }else{
+
+            this.setState({
+                error: "Post id is empty!"
             })
-            .then((finalData) => {
-                return fetchComments(finalData)
-            })
-            .then((finalArray) => {
-                this.setState(() => ({
-                    commentList: finalArray,
-                    fetchedList: true
-                }))
-            })
 
-        
+        }
 
     }
 
     isLoading = () => {
 
-        if((this.state.fetchedUser === false) || (this.state.fetchedList === false)){
+        if(this.state.error){
+            return false
+        }else if(!this.state.user || Object.keys(this.state.user).length === 0){
+            return true
+        }else if(!this.state.commentList || this.state.commentList.length === 0){
             return true
         }else{
             return false
@@ -89,12 +116,19 @@ export default class CommentsSection extends React.Component {
 
     render () {
 
+        //console.log(this.state.error)
+
         return (
-            <div>
-                { this.state.fetchedUser === true && <DisplayUserInfo userInfo={this.state.user} /> }
-                { this.state.fetchedList === true && <DisplayComments cL={this.state.commentList} /> }
-                { this.isLoading() && <Loading /> }
-            </div>
+            <ThemeConsumer>
+                {({theme}) => (
+                    <div>
+                        { this.state.error && <p className={`error-${theme}`}>{ this.state.error }</p>}
+                        { this.isLoading() && <Loading /> }
+                        { Object.keys(this.state.user).length !== 0 && this.state.user && <DisplayPostInfo postInfo={this.state.user} /> }
+                        { this.state.commentList.length !== 0 && this.state.commentList && <DisplayComments cL={this.state.commentList} /> }
+                    </div>
+                )}
+            </ThemeConsumer>
         )
     }
 }
