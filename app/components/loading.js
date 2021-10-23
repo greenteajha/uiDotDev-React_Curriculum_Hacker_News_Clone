@@ -1,13 +1,18 @@
 import React from "react";
 
+// Loading React component
 export default class Loading extends React.Component {
+    
+    // Add state to "Loading" text
     state = {
         content: this.props.text
     }
 
+    // If component did mount, execute function to execute "Loading" animation
     componentDidMount () {
         const { speed, text } = this.props
 
+    // Execute interval function
         this.interval = window.setInterval(() => {
             this.state.content === text + "..."
             ? this.setState({ content: text })
@@ -15,6 +20,7 @@ export default class Loading extends React.Component {
         }, speed)
     }
 
+    // When component unmounts, remove interval function
     componentWillUnmount () {
         window.clearInterval(this.interval)
     }
@@ -28,6 +34,7 @@ export default class Loading extends React.Component {
     }
 }
 
+// Default loading text and speed if no props is passed to Loading component
 Loading.defaultProps = {
     text: "Loading",
     speed: 300
