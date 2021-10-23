@@ -6,6 +6,7 @@ import { newsEntry } from "./newsEntry";
 import { ThemeConsumer } from "../contexts/theme";
 
 
+// Takes in the user's info and displays it
 function DisplayUserInfo ({userInfo}) {
 
         var date = new Date(userInfo.created)
@@ -25,7 +26,7 @@ function DisplayUserInfo ({userInfo}) {
 
 }
 
-
+// Takes in the user's list of news
 function DisplayUserNews ({userNews}) {
 
     return (
@@ -38,7 +39,7 @@ function DisplayUserNews ({userNews}) {
     )
 }
 
-
+// React component for user's news
 export default class UserNews extends React.Component{
     
     state = {
@@ -56,14 +57,13 @@ export default class UserNews extends React.Component{
         this.setState({
             user: {},
             userNewsList: [],
-            fetchedList: false,
-            fetchedUser: false,
             error: null
         })
 
+        // Extracts user id from URL
         const searchValue = queryString.parse(this.props.location.search)
 
-        if(searchValue.userid){
+        if(searchValue.userid){ // Check if user id is empty, if so return an error that user id is empty
 
             fetchUserNews(searchValue.userid)
                 .then((data) => {
@@ -71,7 +71,6 @@ export default class UserNews extends React.Component{
                         .then((res) => {
                             this.setState({
                                 userNewsList: res,
-                                fetchedList: true
                             })
                         })
                 })
@@ -88,7 +87,6 @@ export default class UserNews extends React.Component{
 
                     this.setState ({
                         user: data,
-                        fetchedUser: true
                     })
 
             })
@@ -99,7 +97,7 @@ export default class UserNews extends React.Component{
                 })
             })
         
-        }else{ // Check if user id is empty
+        }else{
 
             this.setState({
                 error: "User name is empty!"
@@ -114,12 +112,9 @@ export default class UserNews extends React.Component{
     // ...If not, isLoading() function is true
     isLoading = () => {
 
-        const fetchedUserNews = this.state.userNewsList
-        const fetchedUserInfo = this.state.user
-
         if(this.state.error){
             return false
-        }else if((this.state.fetchedUser === false) || (this.state.fetchedList === false)){
+        }else if((this.state.user === null) || (!this.state.userNewsList)){
             return true
         }else{
             return false
@@ -129,14 +124,15 @@ export default class UserNews extends React.Component{
     
     // Render user info and user stories
     render () {
+
         return (
             <ThemeConsumer>
                 {({theme}) => (
                     <div>
                         { this.state.error && <p className={`error-${theme}`}>{ this.state.error }</p>}
                         { this.isLoading() && <Loading /> }
-                        { this.state.fetchedUser === true && <DisplayUserInfo userInfo={this.state.user} /> }
-                        { this.state.fetchedList === true && <DisplayUserNews userNews={this.state.userNewsList} /> }
+                        { this.state.user !== null && Object.keys(this.state.user).length !== 0 && <DisplayUserInfo userInfo={this.state.user} /> }
+                        { this.state.userNewsList.length !== 0 && <DisplayUserNews userNews={this.state.userNewsList} /> }
                     </div>
                 )}
             </ThemeConsumer>     
