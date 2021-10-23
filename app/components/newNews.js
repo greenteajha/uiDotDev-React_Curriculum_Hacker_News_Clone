@@ -2,6 +2,7 @@ import React from "react";
 import { fetchNewNews, fetchArticleDetails } from "../utils/api";
 import Loading from "./loading";
 import { newsEntry } from "./newsEntry";
+import { ThemeConsumer } from "../contexts/theme";
 
 
 /* Display all top news article */
@@ -16,12 +17,12 @@ function DisplayNewNews ({newNews}) {
     )
 }
 
-
+// React component for "New" news
 export default class NewNews extends React.Component{
     
     state = {        
         newNewsList: [],
-        fetchedList: 0
+        error: null
     }
 
     componentDidMount(){
@@ -30,8 +31,7 @@ export default class NewNews extends React.Component{
 
     updateNewNews = () => {
         this.setState({
-            newNewsList: [],
-            fetchedList: 0
+            newNewsList: []
         })
 
         fetchNewNews()
@@ -39,17 +39,21 @@ export default class NewNews extends React.Component{
                 fetchArticleDetails(data)
                     .then((res) => {                        
                         this.setState({
-                            newNewsList: res,
-                            fetchedList: 1
+                            newNewsList: res
                         })
                     })
+            })
+            .catch(() => {
+
+                this.setState({
+                    error: "There was an error fetching the New News"
+                })
             })
     }
 
     isLoading = () => {
-        const fetched = this.state.fetchedList
 
-        if(fetched === 0){
+        if(this.state.newNewsList.length === 0 || !this.state.newNewsList ){
             return true
         }else{
             return false
@@ -58,12 +62,16 @@ export default class NewNews extends React.Component{
     }
     
     render () {   
-
         return ( 
-            <div>
-                { this.isLoading() && <Loading /> }
-                <DisplayNewNews newNews={this.state.newNewsList} />
-            </div>          
+            <ThemeConsumer>
+                {({theme}) => (
+                    <div>
+                        { this.state.error && <p className={`error-${theme}`}>{ this.state.error }</p>}
+                        { this.isLoading() && <Loading /> }
+                        { this.state.newNewsList.length !== 0 && this.state.newNewsList && <DisplayNewNews newNews={this.state.newNewsList} /> }
+                    </div>
+                )}    
+            </ThemeConsumer>          
         )
 
     }
