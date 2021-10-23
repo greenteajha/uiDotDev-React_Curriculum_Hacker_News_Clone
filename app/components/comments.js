@@ -9,8 +9,6 @@ import { ThemeConsumer } from "../contexts/theme";
 // Display post info
 function DisplayPostInfo ({postInfo}) {
 
-    //console.log(postInfo)
-
     return (
         <div>
             { newsEntry(postInfo) }
@@ -20,8 +18,6 @@ function DisplayPostInfo ({postInfo}) {
 
 // Display list of comments
 function DisplayComments ({cL}) {
-
-    //console.log(cL)
 
     return (
         <div>
@@ -55,6 +51,7 @@ export default class CommentsSection extends React.Component {
             error: null
         })
 
+        // Extract comment id from URL
         const searchValue = queryString.parse(this.props.location.search)
 
         if(searchValue.id){
@@ -64,21 +61,25 @@ export default class CommentsSection extends React.Component {
 
                     if(data){
 
+                        // Add list of comments id and user information to state
                         this.setState(() => ({
                             user: data,
                             commentIDs: data.kids,
                         }))
 
                         return data.kids
+
                     }else{
                         this.setState({
                             error: "There was an error fetching the comments"
                         })
                     }
                 })
+                // Using comments id to fetch list of comments object
                 .then((finalData) => {
                     return fetchComments(finalData)
                 })
+                // Add comments object to state
                 .then((finalArray) => {
                     this.setState(() => ({
                         commentList: finalArray
@@ -115,9 +116,6 @@ export default class CommentsSection extends React.Component {
     }
 
     render () {
-
-        //console.log(this.state.error)
-
         return (
             <ThemeConsumer>
                 {({theme}) => (
