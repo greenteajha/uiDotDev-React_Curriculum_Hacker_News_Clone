@@ -3,6 +3,7 @@ import { fetchUserNews, fetchUserInfo, fetchArticleDetails } from "../utils/api"
 import Loading from "./loading";
 import queryString from "query-string";
 import { newsEntry } from "./newsEntry";
+import { ThemeConsumer } from "../contexts/theme";
 
 
 function DisplayUserInfo ({userInfo}) {
@@ -10,22 +11,28 @@ function DisplayUserInfo ({userInfo}) {
     var date = new Date(userInfo.created)
 
     return (
-        <React.Fragment>
-            <h1>{ userInfo.id }</h1>
-            <div>
-                joined { date.toLocaleString() } has { userInfo.karma } karma
-            </div>
-        </React.Fragment>
+        <ThemeConsumer>
+            {({theme}) => (
+                <React.Fragment>
+                    <h1 className={`userHeader-${theme}`}>{ userInfo.id }</h1>
+                    <div className={`userInfo-${theme}`}>
+                        joined { date.toLocaleString() } has { userInfo.karma } karma
+                    </div>
+                </React.Fragment>
+            )}
+        </ThemeConsumer>
     )
 }
 
 
 function DisplayUserNews ({userNews}) {
+
     return (
         <ul>
             {userNews.map((news) => {
-                return newsEntry(news)
-            })}
+                    return newsEntry(news)
+                })
+            }
         </ul>
     )
 }
@@ -49,38 +56,52 @@ export default class UserNews extends React.Component{
             user: {},
             userNewsList: [],
             fetchedList: false,
-            fetchedUser: false
+            fetchedUser: false,
+            error: null
         })
 
         const searchValue = queryString.parse(this.props.location.search)
 
-        fetchUserNews(searchValue.userid)
-            .then((data) => {
-                fetchArticleDetails(data)
-                    .then((res) => {
-                        this.setState({
-                            userNewsList: res,
-                            fetchedList: true
+        if(searchValue.userid){
+
+            fetchUserNews(searchValue.userid)
+                .then((data) => {
+                    console.log(data)
+                    fetchArticleDetails(data)
+                        .then((res) => {
+                            this.setState({
+                                userNewsList: res,
+                                fetchedList: true
+                            })
                         })
-                    })
+                })
+            
+            fetchUserInfo(searchValue.userid)
+            .then((data) => {
+                this.setState ({
+                    user: data,
+                    fetchedUser: true
+                })
             })
         
-        fetchUserInfo(searchValue.userid)
-        .then((data) => {
-            this.setState ((data) => ({
-                user: data,
-                fetchedUser: true
-            }))
-        })
+        }else{
 
+            this.setState({
+                error: "User name is empty!"
+            })
+
+        }
         
     }
 
     isLoading = () => {
+
         const fetchedUserNews = this.state.userNewsList
         const fetchedUserInfo = this.state.user
 
-        if((this.state.fetchedUser === false) || (this.state.fetchedList === false)){
+        if(this.state.error){
+            return false
+        }else if((this.state.fetchedUser === false) || (this.state.fetchedList === false)){
             return true
         }else{
             return false
@@ -89,12 +110,12 @@ export default class UserNews extends React.Component{
     }
     
     render () {
-
         return (
             <div>
-                { this.state.fetchedUser === true && <DisplayUserInfo userInfo={this.state.user} /> }
-                <DisplayUserNews userNews={this.state.userNewsList} />
+                { this.state.error && <p className='error'>{ this.state.error }</p>}
                 { this.isLoading() && <Loading /> }
+                { this.state.fetchedUser === true && <DisplayUserInfo userInfo={this.state.user} /> }
+                { this.state.fetchedList === true && <DisplayUserNews userNews={this.state.userNewsList} /> }
             </div>       
         )
 

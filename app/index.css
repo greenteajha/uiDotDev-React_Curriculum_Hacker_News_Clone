@@ -9,11 +9,9 @@ body,
 }
 
 .container-light {
-    margin: 0px;
 }
 
 .container-dark {
-    margin: 0px;
     background-color: #1c2022;
 }
 
@@ -123,6 +121,7 @@ ul {
 .loadingText {
     font-weight: bold;
     color: rgb(187, 46, 31);
+    height: 100vh;
 }
 
 .commentsInfo-light{
@@ -139,4 +138,20 @@ ul {
 
 .commentsFull-dark{
     color: lightgrey
+}
+
+.userHeader-light{
+
+}
+
+.userHeader-dark{
+    color: lightgrey;
+}
+
+.userInfo-light{
+
+}
+
+.userInfo-dark{
+    color: lightgrey;
 }

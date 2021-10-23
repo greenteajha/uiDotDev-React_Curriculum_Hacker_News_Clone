@@ -1,4 +1,4 @@
-/* Function to obtain the all comments from Hacker News API */
+/* Function to obtain the ALL comments based off an array of comments ID input from Hacker News API */
 export function fetchComments (commentIDs) {
 
     return Promise.all(
@@ -9,7 +9,7 @@ export function fetchComments (commentIDs) {
     )
 }
 
-/* Function to obtain the user information from Hacker News API */
+/* Function to obtain the user information based off an user value input from Hacker News API */
 export function fetchUserInfo (userName) {
 
     const userStoriesEndPoint = `https://hacker-news.firebaseio.com/v0/user/${userName}.json?print=pretty`
@@ -19,10 +19,13 @@ export function fetchUserInfo (userName) {
         .then((data) => {
             return data
         })
+        .catch(() => {
+            console.warn('Error fetching user information: ')
+        })
 }
 
 
-/* Function to obtain the new user stories from Hacker News API */
+/* Function to obtain the new user stories based off an user value input from Hacker News API */
 export function fetchUserNews (userName) {
 
     const userStoriesEndPoint = `https://hacker-news.firebaseio.com/v0/user/${userName}.json?print=pretty`
@@ -32,10 +35,13 @@ export function fetchUserNews (userName) {
         .then((data) => {
             return data.submitted.slice(0,100)
         })
+        .catch(() => {
+            console.warn('Error fetching user stories: ')
+        })
 }
 
 
-/* Function to obtain the new 20 news from Hacker News API */
+/* Function to obtain the new top 20 recent news from Hacker News API */
 export function fetchNewNews () {
 
     const newStoriesEndPoint = window.encodeURI('https://hacker-news.firebaseio.com/v0/newstories.json?print=pretty') 
@@ -48,7 +54,7 @@ export function fetchNewNews () {
 }
 
 
-/* Function to obtain the top 20 news from Hacker News API */
+/* Function to obtain the top 20 news top news from Hacker News API */
 export function fetchTopNews () {
 
     const topStoriesEndPoint = window.encodeURI('https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty') 
@@ -61,7 +67,7 @@ export function fetchTopNews () {
 }
 
 
-/* Function to fetch multiple articles based on article IDs */
+/* Function to fetch multiple article details based on an array of article IDs */
 export function fetchArticleDetails (articleIDs) {
 
     return Promise.all(

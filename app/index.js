@@ -6,12 +6,15 @@ import Navigation from "./components/navigation";
 import Loading from "./components/loading";
 import { ThemeProvider } from "./contexts/theme";
 
+// Delayed import of components
 const TopNews = React.lazy(() => import('./components/topNews'))
 const NewNews = React.lazy(() => import('./components/newNews'))
 const UserNews = React.lazy(() => import('./components/userNews'))
 const commentsSect = React.lazy(() => import('./components/comments'))
 
 class App extends React.Component {
+
+    // Create state to track theme and function to toggle 
     state = {
         theme: 'light',
         toggleTheme: () => {
@@ -21,8 +24,11 @@ class App extends React.Component {
         }
     }
 
+
     render() {
         return (
+
+            // Create React Router
             <Router>
                 <ThemeProvider value={this.state}>
                     <div className={`container-${this.state.theme}`}>
@@ -43,6 +49,7 @@ class App extends React.Component {
     }
 }
 
+// Render "App" components
 ReactDOM.render(
     <App />,
     document.getElementById('app')
