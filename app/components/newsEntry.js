@@ -1,10 +1,8 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { ThemeConsumer } from "../contexts/theme";
 
 export function newsEntry (newsInfo) {
-
-    console.log(newsInfo)
 
     const { by, descendants, id, kids, time, title, url } = newsInfo
 
@@ -20,7 +18,15 @@ export function newsEntry (newsInfo) {
                             to={`/user?userid=${ by }`}
                             className={`nav-link-${theme}`}
                         >{ by }
-                        </NavLink> on { date.toLocaleString() } with <a href={`/post?id=${ id }`} className={`comments-link-${theme}`}>{ descendants }</a> comments
+                        </NavLink> on { date.toLocaleString() } with <Link
+                            className={`comments-link-${theme}`}
+                            to={{
+                                pathname: `/post`,
+                                search: `?id=${ id }`
+                            }}
+                        >
+                            { descendants }
+                        </Link> comments
                     </div>
                 </li>
             )}

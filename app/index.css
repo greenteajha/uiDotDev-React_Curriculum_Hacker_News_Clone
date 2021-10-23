@@ -57,8 +57,14 @@ ul {
     padding-bottom: 10px;
 }
 
-.CommentsEntry {
+.CommentsEntry-light {
     background: lightgrey;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+.CommentsEntry-dark {
+    background: darkslategray;
     padding: 10px;
     margin: 10px 0;
 }
@@ -66,11 +72,13 @@ ul {
 .nav-link-light {
     color: #1c2022;
     text-align: center;
+    font-weight: bold;
 }
 
 .nav-link-dark {
     color: lightgrey;
     text-align: center;
+    font-weight: bold;
 }
 
 .bar-nav-link-light {
@@ -115,4 +123,20 @@ ul {
 .loadingText {
     font-weight: bold;
     color: rgb(187, 46, 31);
+}
+
+.commentsInfo-light{
+
+}
+
+.commentsInfo-dark{
+    color: lightgrey
+}
+
+.commentsFull-light{
+
+}
+
+.commentsFull-dark{
+    color: lightgrey
 }

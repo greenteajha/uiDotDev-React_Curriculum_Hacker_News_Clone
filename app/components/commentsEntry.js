@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { ThemeConsumer } from "../contexts/theme";
 
 export function commentsEntry (comments) {
 
@@ -10,16 +11,20 @@ export function commentsEntry (comments) {
     var date = new Date(time)
 
     return(
-        <div className="CommentsEntry" key={ id } >
-            <div className="commentsInfo" >
-                by <NavLink
-                    to={`/user?userid=${ by }`}
-                    className="nav-link"
-                >{ by }
-                </NavLink> on { date.toLocaleString() }
+        <ThemeConsumer>
+            {({ theme }) => (
+            <div className={`CommentsEntry-${theme}`} key={ id } >
+                <div className={`commentsInfo-${theme}`} >
+                    by <NavLink
+                        to={`/user?userid=${ by }`}
+                        className={`nav-link-${theme}`}
+                    >{ by }
+                    </NavLink> on { date.toLocaleString() }
+                </div>
+                <div className={`commentsFull-${theme}`} dangerouslySetInnerHTML={ specialText } >
+                </div>
             </div>
-            <div className="commentsFull" dangerouslySetInnerHTML={ specialText } >
-            </div>
-        </div>
+            )}
+        </ThemeConsumer>
     )
 }
