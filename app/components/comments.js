@@ -5,6 +5,7 @@ import queryString from "query-string"
 import { newsEntry } from "./newsEntry";
 import { commentsEntry } from "./commentsEntry";
 import { ThemeConsumer } from "../contexts/theme";
+import PropTypes from 'prop-types'
 
 // Display post info
 function DisplayPostInfo ({postInfo}) {
@@ -14,6 +15,10 @@ function DisplayPostInfo ({postInfo}) {
             { newsEntry(postInfo) }
         </div>
     )
+}
+
+DisplayPostInfo.PropTypes = {
+    postInfo: PropTypes.object.isRequired
 }
 
 // Display list of comments
@@ -26,7 +31,10 @@ function DisplayComments ({cL}) {
             })}
         </div>
     )
+}
 
+DisplayComments.PropTypes = {
+    cL: PropTypes.array.isRequired
 }
 
 // React component for comments section
