@@ -26,7 +26,9 @@
     "webpack-dev-server": "^4.3.1"
   },
   "scripts": {
-    "start": "webpack serve"
+    "start": "webpack serve",
+    "build": "NODE_ENV='production' webpack",
+    "build-in-windows": "set NODE_ENV=production&&webpack"
   },
   "babel": {
     "presets": [
