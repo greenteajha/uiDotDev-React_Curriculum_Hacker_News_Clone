@@ -8,10 +8,6 @@ body,
         Oxygen-Sans, Ubuntu, Cantarell, Helvetica Neue, sans-serif;
 }
 
-.container-light {
-
-}
-
 .container-dark {
     background-color: #394033;
     height: max-content;
@@ -193,11 +189,19 @@ ul {
 }
 
 .error-light{
-
+    font-weight: bold;
+    color: rgb(187, 46, 31);
+    height: 100vh;
+    margin: 40px;
+    padding-top: 15px;
 }
 
 .error-dark{
-    color: lightgrey
+    font-weight: bold;
+    color: rgb(238, 55, 34);
+    height: 100vh;
+    margin: 40px;
+    padding-top: 15px;
 }
 
 .newsContainer{
