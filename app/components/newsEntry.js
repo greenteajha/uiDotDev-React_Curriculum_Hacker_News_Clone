@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink, Link } from "react-router-dom";
 import { ThemeConsumer } from "../contexts/theme";
+import PropTypes from 'prop-types'
 
 export function newsEntry (newsInfo) {
     
@@ -41,4 +42,8 @@ export function newsEntry (newsInfo) {
             )
         }
     }
+}
+
+newsEntry.PropTypes = {
+    newsInfo: PropTypes.object.isRequired
 }
