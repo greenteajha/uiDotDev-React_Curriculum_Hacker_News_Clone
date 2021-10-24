@@ -3,7 +3,7 @@ import { fetchNewNews, fetchArticleDetails } from "../utils/api";
 import Loading from "./loading";
 import { newsEntry } from "./newsEntry";
 import { ThemeConsumer } from "../contexts/theme";
-
+import PropTypes from 'prop-types'
 
 /* Display all top news article */
 function DisplayNewNews ({newNews}) {
@@ -15,6 +15,10 @@ function DisplayNewNews ({newNews}) {
             })}
         </ul>
     )
+}
+
+DisplayNewNews.PropTypes = {
+    newNews: PropTypes.array.isRequired
 }
 
 // React component for "New" news
