@@ -27,6 +27,11 @@ function DisplayUserInfo ({userInfo}) {
 
 }
 
+//Props type check for DisplayUserInfo
+DisplayUserInfo.PropTypes = {
+    userInfo: PropTypes.object.isRequired
+}
+
 // Takes in the user's list of news
 function DisplayUserNews ({userNews}) {
 
@@ -38,6 +43,10 @@ function DisplayUserNews ({userNews}) {
             }
         </ul>
     )
+}
+
+DisplayUserNews.PropTypes = {
+    userNews: PropTypes.array.isRequired
 }
 
 // React component for user's news
