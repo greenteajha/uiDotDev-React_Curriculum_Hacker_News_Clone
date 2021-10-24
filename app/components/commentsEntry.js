@@ -15,9 +15,9 @@ export function commentsEntry (comments) {
 
     // Text loaded is then indicated as dangerouslySetInnerHTML to load HTML tags
     return(
-        <ThemeConsumer>
+        <ThemeConsumer key={ id }>
             {({ theme }) => (
-            <div className={`CommentsEntry-${theme}`} key={ id } >
+            <div className={`CommentsEntry-${theme}`} >
                 <div className={`commentsInfo-${theme}`} >
                     by <NavLink
                         to={`/user?userid=${ by }`}

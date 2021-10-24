@@ -9,7 +9,7 @@ import PropTypes from 'prop-types'
 function DisplayTopNews ({topNews}) {
 
     return (
-        <ul>
+        <ul className="newsContainer">
             {topNews.map((news) => {
                 return newsEntry(news)
             })}
@@ -70,11 +70,11 @@ export default class TopNews extends React.Component{
 
             <ThemeConsumer>
                 {(theme) => (
-                    <div>
+                    <React.Fragment>
                         { this.state.error && <p className={`error-${theme}`}>{ this.state.error }</p>}
                         { this.isLoading() && <Loading /> }
                         { this.state.topNewsList.length !== 0 && this.state.topNewsList && <DisplayTopNews topNews={this.state.topNewsList} /> }
-                    </div>
+                    </React.Fragment>
                 )}
             </ThemeConsumer>       
         )

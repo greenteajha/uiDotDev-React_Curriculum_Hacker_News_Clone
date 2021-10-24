@@ -18,7 +18,7 @@ export function newsEntry (newsInfo) {
                 <ThemeConsumer key={id} >
                     {({ theme }) => (
                         <li className="NewsEntry" >
-                            <a className="title-link" href={ url } >{ title }</a>
+                            <a className={`title-link-${theme}`} href={ url } >{ title }</a>
                             <div className={`newsInfo-${theme}`} >
                                 by <NavLink
                                     to={`/user?userid=${ by }`}

@@ -11,7 +11,7 @@ import PropTypes from 'prop-types'
 function DisplayPostInfo ({postInfo}) {
 
     return (
-        <div>
+        <div className="postInfoContainer" >
             { newsEntry(postInfo) }
         </div>
     )
@@ -25,7 +25,7 @@ DisplayPostInfo.propTypes = {
 function DisplayComments ({cL}) {
 
     return (
-        <div>
+        <div className="commentsContainer">
             {cL.map((comment) => {
                 return commentsEntry(comment)
             })}

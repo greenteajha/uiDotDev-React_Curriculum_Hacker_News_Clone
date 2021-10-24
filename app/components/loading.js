@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from 'prop-types'
+import { ThemeConsumer } from "../contexts/theme";
 
 // Loading React component
 export default class Loading extends React.Component {
@@ -28,9 +29,13 @@ export default class Loading extends React.Component {
     
     render () {
         return (
-            <p className="loadingText">
-                { this.state.content }
-            </p>
+            <ThemeConsumer>
+                {({theme}) => (
+                    <p className={`loadingText-${theme}`}>
+                        { this.state.content }
+                    </p>
+                )}
+            </ThemeConsumer>
         )
     }
 }

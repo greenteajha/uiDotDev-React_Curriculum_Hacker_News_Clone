@@ -15,12 +15,12 @@ function DisplayUserInfo ({userInfo}) {
         return (
             <ThemeConsumer>
                 {({theme}) => (
-                    <React.Fragment>
+                    <div className="userInfoContainer">
                         <h1 className={`userHeader-${theme}`}>{ userInfo.id }</h1>
                         <div className={`userInfo-${theme}`}>
                             joined { date.toLocaleString() } has { userInfo.karma } karma
                         </div>
-                    </React.Fragment>
+                    </div>
                 )}
             </ThemeConsumer>
         )
@@ -36,7 +36,7 @@ DisplayUserInfo.propTypes = {
 function DisplayUserNews ({userNews}) {
 
     return (
-        <ul>
+        <ul className="newsContainer">
             {userNews.map((news) => {
                     return newsEntry(news)
                 })
@@ -122,9 +122,12 @@ export default class UserNews extends React.Component{
     // ...If not, isLoading() function is true
     isLoading = () => {
 
+        console.log(this.state.user)
+        console.log(this.state.userNewsList)
+
         if(this.state.error){
             return false
-        }else if((this.state.user === null) || (!this.state.userNewsList)){
+        }else if((Object.keys(this.state.user).length === 0) || (this.state.userNewsList.length === 0)){
             return true
         }else{
             return false

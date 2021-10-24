@@ -9,7 +9,7 @@ import PropTypes from 'prop-types'
 function DisplayNewNews ({newNews}) {
 
     return (
-        <ul>
+        <ul className="newsContainer">
             {newNews.map((news) => {
                 return newsEntry(news)
             })}

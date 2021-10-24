@@ -9,10 +9,12 @@ body,
 }
 
 .container-light {
+
 }
 
 .container-dark {
-    background-color: #6B7366;
+    background-color: #394033;
+    height: max-content;
 }
 
 li {
@@ -39,10 +41,16 @@ ul {
     margin-right: 10px;
 }
 
-.title-link {
+.title-link-light {
     font-weight: bold;
     text-decoration: none;
     color: rgb(187, 46, 31);
+}
+
+.title-link-dark {
+    font-weight: bold;
+    text-decoration: none;
+    color: rgb(238, 55, 34);
 }
 
 .newsInfo-light {
@@ -56,20 +64,7 @@ ul {
 }
 
 .NewsEntry {
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
-
-.CommentsEntry-light {
-    background: lightgrey;
-    padding: 10px;
-    margin: 10px 0;
-}
-
-.CommentsEntry-dark {
-    background: darkslategray;
-    padding: 10px;
-    margin: 10px 0;
+    padding: 15px;
 }
 
 .nav-link-light {
@@ -116,49 +111,85 @@ ul {
 }
 
 .top-nav-light {
-    background-color: wheat;
+    background-color: #F2CFC2;
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
 .top-nav-dark {
-    background-color: #394033;
+    background-color: black;
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
-.loadingText {
+.loadingText-light {
     font-weight: bold;
     color: rgb(187, 46, 31);
     height: 100vh;
+    margin: 40px;
+    padding-top: 15px;
+}
+
+.loadingText-dark {
+    font-weight: bold;
+    color: rgb(238, 55, 34);
+    height: 100vh;
+    margin: 40px;
+    padding-top: 15px;
+}
+
+.CommentsEntry-light {
+    background: lightgrey;
+    padding: 10px;
+    margin: 10px;
+}
+
+.CommentsEntry-dark {
+    background: #6B7366;
+    padding: 10px;
+    margin: 10px;
 }
 
 .commentsInfo-light{
-
+    padding: 10px;
 }
 
 .commentsInfo-dark{
-    color: lightgrey
+    color: #F2CFC2;
+    padding: 10px;
 }
 
 .commentsFull-light{
-
+    padding: 10px;
 }
 
 .commentsFull-dark{
-    color: lightgrey
+    color: #F2CFC2;
+    padding: 10px;
 }
 
 .userHeader-light{
-
+    margin: 0;
+    padding-bottom: 10px;
 }
 
 .userHeader-dark{
     color: lightgrey;
+    margin: 0;
+    padding-bottom: 10px;
 }
 
 .userInfo-light{
-
+    margin: 0;
+    padding-top: 10px;
 }
 
 .userInfo-dark{
     color: lightgrey;
+    margin: 0;
+    padding-top: 10px;
 }
 
 .error-light{
@@ -167,4 +198,20 @@ ul {
 
 .error-dark{
     color: lightgrey
+}
+
+.newsContainer{
+    margin: 40px;
+}
+
+.userInfoContainer{
+    margin: 40px;
+}
+
+.postInfoContainer{
+    margin: 40px;
+}
+
+.commentsContainer{
+    margin: 40px;
 }
