@@ -17,7 +17,7 @@ function DisplayPostInfo ({postInfo}) {
     )
 }
 
-DisplayPostInfo.PropTypes = {
+DisplayPostInfo.propTypes = {
     postInfo: PropTypes.object.isRequired
 }
 
@@ -33,7 +33,7 @@ function DisplayComments ({cL}) {
     )
 }
 
-DisplayComments.PropTypes = {
+DisplayComments.propTypes = {
     cL: PropTypes.array.isRequired
 }
 

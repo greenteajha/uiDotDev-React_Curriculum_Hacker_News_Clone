@@ -33,6 +33,6 @@ export function commentsEntry (comments) {
     )
 }
 
-commentsEntry.PropTypes = {
+commentsEntry.propTypes = {
     comments: PropTypes.object.isRequired
 }

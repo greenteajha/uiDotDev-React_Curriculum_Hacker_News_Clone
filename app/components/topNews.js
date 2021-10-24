@@ -17,7 +17,7 @@ function DisplayTopNews ({topNews}) {
     )
 }
 
-DisplayTopNews.PropTypes = {
+DisplayTopNews.propTypes = {
     topNews: PropTypes.array.isRequired
 }
 

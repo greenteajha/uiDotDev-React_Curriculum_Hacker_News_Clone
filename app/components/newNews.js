@@ -17,7 +17,7 @@ function DisplayNewNews ({newNews}) {
     )
 }
 
-DisplayNewNews.PropTypes = {
+DisplayNewNews.propTypes = {
     newNews: PropTypes.array.isRequired
 }
 

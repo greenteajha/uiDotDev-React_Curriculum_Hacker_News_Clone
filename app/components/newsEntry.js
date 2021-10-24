@@ -15,10 +15,10 @@ export function newsEntry (newsInfo) {
             var date = new Date(time)
 
             return(
-                <ThemeConsumer>
+                <ThemeConsumer key={id} >
                     {({ theme }) => (
-                        <li className="NewsEntry" key={ id } >
-                            <a className="title-link" href={ url }>{ title }</a>
+                        <li className="NewsEntry" >
+                            <a className="title-link" href={ url } >{ title }</a>
                             <div className="newsInfo" >
                                 by <NavLink
                                     to={`/user?userid=${ by }`}
@@ -42,6 +42,6 @@ export function newsEntry (newsInfo) {
     }
 }
 
-newsEntry.PropTypes = {
+newsEntry.propTypes = {
     newsInfo: PropTypes.object.isRequired
 }

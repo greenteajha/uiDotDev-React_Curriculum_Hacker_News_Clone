@@ -28,7 +28,7 @@ function DisplayUserInfo ({userInfo}) {
 }
 
 //Props type check for DisplayUserInfo
-DisplayUserInfo.PropTypes = {
+DisplayUserInfo.propTypes = {
     userInfo: PropTypes.object.isRequired
 }
 
@@ -45,7 +45,7 @@ function DisplayUserNews ({userNews}) {
     )
 }
 
-DisplayUserNews.PropTypes = {
+DisplayUserNews.propTypes = {
     userNews: PropTypes.array.isRequired
 }
 
