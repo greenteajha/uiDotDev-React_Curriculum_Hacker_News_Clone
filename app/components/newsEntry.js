@@ -19,7 +19,7 @@ export function newsEntry (newsInfo) {
                     {({ theme }) => (
                         <li className="NewsEntry" >
                             <a className="title-link" href={ url } >{ title }</a>
-                            <div className="newsInfo" >
+                            <div className={`newsInfo-${theme}`} >
                                 by <NavLink
                                     to={`/user?userid=${ by }`}
                                     className={`nav-link-${theme}`}

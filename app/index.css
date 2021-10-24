@@ -12,7 +12,7 @@ body,
 }
 
 .container-dark {
-    background-color: #1c2022;
+    background-color: #6B7366;
 }
 
 li {
@@ -45,8 +45,13 @@ ul {
     color: rgb(187, 46, 31);
 }
 
-.newsInfo {
+.newsInfo-light {
     color: grey;
+    margin-top: 5px;
+}
+
+.newsInfo-dark {
+    color: #F2CFC2;
     margin-top: 5px;
 }
 
@@ -115,7 +120,7 @@ ul {
 }
 
 .top-nav-dark {
-    background-color: black;
+    background-color: #394033;
 }
 
 .loadingText {
