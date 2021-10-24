@@ -4,6 +4,7 @@ import Loading from "./loading";
 import queryString from "query-string";
 import { newsEntry } from "./newsEntry";
 import { ThemeConsumer } from "../contexts/theme";
+import PropTypes from 'prop-types'
 
 
 // Takes in the user's info and displays it
