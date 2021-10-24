@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { ThemeConsumer } from "../contexts/theme";
+import PropTypes from 'prop-types'
 
 // Functional component for comments entry
 export function commentsEntry (comments) {
@@ -30,4 +31,8 @@ export function commentsEntry (comments) {
             )}
         </ThemeConsumer>
     )
+}
+
+commentsEntry.PropTypes = {
+    comments: PropTypes.object.isRequired
 }

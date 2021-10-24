@@ -14,8 +14,6 @@ export function newsEntry (newsInfo) {
 
             var date = new Date(time)
 
-            console.log(newsInfo)
-
             return(
                 <ThemeConsumer>
                     {({ theme }) => (

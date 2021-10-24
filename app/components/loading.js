@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types'
 
 // Loading React component
 export default class Loading extends React.Component {
@@ -32,6 +33,11 @@ export default class Loading extends React.Component {
             </p>
         )
     }
+}
+
+Loading.PropTypes = {
+    text: PropTypes.string.isRequired,
+    speed: PropTypes.number.isRequired
 }
 
 // Default loading text and speed if no props is passed to Loading component
